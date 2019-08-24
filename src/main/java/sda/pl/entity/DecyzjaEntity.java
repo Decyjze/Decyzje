@@ -1,15 +1,21 @@
 package sda.pl.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 //Emil
+@Getter
+@Setter
 public class DecyzjaEntity {
     private static Long staticId = 1L;
     private Long id;
     private String numer;
-    private LocalDateTime dataWaznosci;
-    private LocalDateTime dataWydania;
+    private LocalDate dataWaznosci;
+    private LocalDate dataWydania;
 
-    public DecyzjaEntity(String numer, LocalDateTime dataWaznosci, LocalDateTime dataWydania) {
+    public DecyzjaEntity(String numer, LocalDate dataWaznosci, LocalDate dataWydania) {
         this.id = staticId;
         staticId++;
         this.numer = numer;

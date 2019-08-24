@@ -17,7 +17,7 @@ PodmiotEntity:
 Long id; Long decyzjaId; Long nrWariantu;
 
 DanePodmiotu:
-Long id; Long podmiotId, Long nrWariantu; String imie; String nazwisko; String pesel;
+Long podmiotId; Long podmiotId, Long nrWariantu; String imie; String nazwisko; String pesel;
 String miasto; String nazwaUlicy; Integer nrDomu; Integer nrMieszkania;
 
 StatusRekordu:

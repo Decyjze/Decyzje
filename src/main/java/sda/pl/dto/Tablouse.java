@@ -8,7 +8,7 @@ public class Tablouse {
 
     private String numer;
     private Zl zl;
-    private List<Blankiety> blankiety = null;
+    private List<Blankiet> blankiet = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getNumer() {
@@ -27,12 +27,12 @@ public class Tablouse {
         this.zl = zl;
     }
 
-    public List<Blankiety> getBlankiety() {
-        return blankiety;
+    public List<Blankiet> getBlankiet() {
+        return blankiet;
     }
 
-    public void setBlankiety(List<Blankiety> blankiety) {
-        this.blankiety = blankiety;
+    public void setBlankiet(List<Blankiet> blankiet) {
+        this.blankiet = blankiet;
     }
 
     public Map<String, Object> getAdditionalProperties() {

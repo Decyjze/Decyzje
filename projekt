@@ -48,7 +48,7 @@ WydajDecyzjeRequest:
 String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tablice; DanePodmiotuDto danePodmiotu;
 
 TablicaDto:
-String numer; ZnakLegalizacyjnyDto zl; List<BlankietDto> blankiety;
+String numer; ZnakLegalizacyjnyDto zl; List<BlankietDto> blankiet;
 
 ZnakLegalizacyjnyDto:
 String numer;

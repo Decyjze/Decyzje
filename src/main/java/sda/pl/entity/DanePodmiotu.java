@@ -1,6 +1,7 @@
 package sda.pl.entity;
 
 public class DanePodmiotu {
+    private static Long staticId = 1L;
     private Long id;
     private Long podmiotId;
     private Long nrWariantu;

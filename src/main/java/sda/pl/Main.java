@@ -10,7 +10,10 @@ public class Main {
     public static void main(String[] args) throws IOException {
         JsonToObject jsonToObject = new JsonToObject();
         WydajDecDto jsontoWydajDec = jsonToObject.getJsontoWydajDec(new File("json/wydajDec.json"));
-        String dataWaznosci = jsontoWydajDec.getDataWaznosci();
-        System.out.println(dataWaznosci);
+        WydajDecDto jsontoWydajDecTW01 = jsonToObject.getJsontoWydajDec(new File("json/wydajDecTW01.json"));
+        WydajDecDto jsonWydajDecTW05 = jsonToObject.getJsontoWydajDec(new File("json/wydajDecTW05.json"));
+
+
+
     }
 }

@@ -7,7 +7,4 @@ public class BlankietEntity  {
     private String numer;
     private TypDokumentu typ;
 
-    public static void main(String[] args) {
-
-    }
 }

@@ -12,4 +12,17 @@ public class DanePodmiotu {
     private Integer nrDomu;
     private Integer nrMieszkania;
 
+    public DanePodmiotu(Long id, Long podmiotId, Long nrWariantu, String imie, String nazwisko, String pesel,
+                        String miasto, String nazwaUlicy, Integer nrDomu, Integer nrMieszkania) {
+        this.id = id;
+        this.podmiotId = podmiotId;
+        this.nrWariantu = nrWariantu;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.pesel = pesel;
+        this.miasto = miasto;
+        this.nazwaUlicy = nazwaUlicy;
+        this.nrDomu = nrDomu;
+        this.nrMieszkania = nrMieszkania;
+    }
 }

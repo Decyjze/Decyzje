@@ -13,7 +13,7 @@ public class WydajDec {
     private String numer;
     private String dataWydania;
     private String dataWaznosci;
-    private List<Tablouse> tablice = null;
+    private List<Tablice> tablice;
     private DanePodmiotu danePodmiotu;
 
 }

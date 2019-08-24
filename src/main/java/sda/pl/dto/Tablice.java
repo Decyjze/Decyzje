@@ -7,10 +7,10 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Tablouse {
+public class Tablice {
 
     private String numer;
     private Zl zl;
-    private List<Blankiet> blankiet = null;
+    private List<Blankiet> blankiet;
 
 }

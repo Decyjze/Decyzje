@@ -1,4 +1,4 @@
-package sda.pl;
+package sda.pl.request;
 
 public class WydajDecyzjeRequest {
 }

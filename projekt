@@ -45,10 +45,10 @@ W momencie zapisu Encji generowane sa automatycznie ich id. Zaczynamy od 1 i inc
 1. Long wydajDecyzje(WydajDecyzjeRequest dto)
 zwracany id sda.pl.entity.DecyzjaEntity
 WydajDecyzjeRequest:
-String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tablice; DanePodmiotuDto danePodmiotu;
+String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tabliceDto; DanePodmiotuDto danePodmiotuDto;
 
 TablicaDto:
-String numer; ZnakLegalizacyjnyDto zl; List<BlankietDto> blankiet;
+String numer; ZnakLegalizacyjnyDto zlDto; List<BlankietDto> blankietDto;
 
 ZnakLegalizacyjnyDto:
 String numer;
@@ -87,7 +87,7 @@ Możemy podać tylko jeden z parametrów np.
 czyli nie możemy przekazać idDecyzji oraz numeruDecyzji
 
 UdostepnijDecyzje:
-sda.pl.entity.DecyzjaEntity decyzja; sda.pl.entity.UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tablice; DanePodmiotu danePodmiotu
+sda.pl.entity.DecyzjaEntity decyzja; sda.pl.entity.UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tabliceDto; DanePodmiotu danePodmiotuDto
 
 3. Long uchylDecyzje(UchylDecyzjeRequest dto);
 -metoda polegająca na uchyleniu decyzji - czyli wykonując tą czynność dataWaznosci będzie zastępowana przez datęUchylenia

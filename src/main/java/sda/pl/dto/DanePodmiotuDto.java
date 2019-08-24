@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class DanePodmiotu {
+public class DanePodmiotuDto {
 
     private String imie;
     private String nazwisko;

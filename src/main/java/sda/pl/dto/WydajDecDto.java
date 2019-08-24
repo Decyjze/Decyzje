@@ -8,12 +8,12 @@ import java.util.List;
 
 @Getter
 @Setter
-public class WydajDec {
+public class WydajDecDto {
 
     private String numer;
     private String dataWydania;
     private String dataWaznosci;
-    private List<Tablice> tablice;
-    private DanePodmiotu danePodmiotu;
+    private List<TabliceDto> tabliceDto;
+    private DanePodmiotuDto danePodmiotuDto;
 
 }

@@ -12,6 +12,13 @@ public class WydanieDecyzjiService {
 
     private final WydajDecyzjeRequest dto;
     private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
+    private  final UchylDecyzje uchylDecyzje;
 
     public WydanieDecyzjiService(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje) {
         this.dto = dto;

@@ -1,0 +1,163 @@
+DecyzjaEntity:
+Long id; String numer; LocalDateTime dataWaznosci; LocalDateTime dataWydania;
+
+UchylenieDecyzjiEntity:
+Long id; Long decyzjaId; LocalDate dataUchylenia;
+
+BlankietEntity:
+Long id; Long decyzjaId; String numer; TypDokumentu typ;
+
+OznaczenieEntity:
+Long id; Long decyzjaId; String numer; RodzajOznaczenia rodzajOznaczenia;
+Long zl2TpId; Stan stan;
+pole zl2TpId - jest to pole, które będzie uzupełnione tylko dla ZnakuLegalizacyjnego
+i będzie się tam zawierać id tablicy.
+
+PodmiotEntity:
+Long id; Long decyzjaId; Long nrWariantu;
+
+DanePodmiotu:
+Long id; Long podmiotId, Long nrWariantu; String imie; String nazwisko; String pesel;
+String miasto; String nazwaUlicy; Integer nrDomu; Integer nrMieszkania;
+
+StatusRekordu:
+A, H
+
+Stan:
+ODEBRANY, UTRACONY
+
+RodzajOznaczenia:
+ZNAK_LEGALIZACYJNY, TABLICA_POJAZDU
+
+TypDokumentu:
+PC, DR
+gdzie:
+PC - Pozwolenie Czasowe
+DR - Dowód Rejestracyjny
+
+Metody:
+Na wejściu przyjmują dto, dto będą wczytywane z dysku jako plik json, należy je zmapować na
+odpowiednie klasy.
+Metoda wydajDecyzje będzie mieć plik wydajDecyzje.json i mapujemy go na klasę WydajDecyzjeRequest
+analogicznie inne metody będa mieć swoje jsony.
+W momencie zapisu Encji generowane sa automatycznie ich id. Zaczynamy od 1 i incrementujemy o +1
+ kazdy następny zapis.
+1. Long wydajDecyzje(WydajDecyzjeRequest dto)
+zwracany id DecyzjaEntity
+WydajDecyzjeRequest:
+String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tablice; DanePodmiotuDto danePodmiotu;
+
+TablicaDto:
+String numer; ZnakLegalizacyjnyDto zl; List<BlankietDto> blankiety;
+
+ZnakLegalizacyjnyDto:
+String numer;
+
+BlankietDto:
+String numer; String typ;
+
+DanePodmiotuDto:
+String imie; String nazwisko; String pesel;
+String miasto; String nazwaUlicy; Integer nrDomu; Integer nrMieszkania;
+
+wydajDecyzję polega na tym, aby zapisać do naszych encji odpowiednio wszystkie dane z requestu.
+przed zapisem jednak należy wykonać kilka walidacji podanych danych:
+
+Tablice Walidacyjne:
+TW01.01: DTO_->dataWaznosci = Data wydania decyzji + 1 rok
+TW01.02: Numer decyzji nie może się powtarzać z Numerem decyzji w bazie
+TW01.03: Numer oznaczeń nie  może się powtarzać z numerem tablicy lub znaku legalizacyjnego w bazie
+TW01.04: Numer blankietu nie może sie powtarzać z numerem blankietu w bazie
+Tw01.05: Numery oznaczeń oraz blankietów nie mogą się powtórzyć w ramach jednego komumikatu (nie możemy przesłać w pliku json np.
+dwa razy blankietu o tym samym numerze).
+TW01.06: W bazie danych nie może istnieć więcej niż jedna ważna decyzja(czyli taka, która na datę teraźniejszą zawiera się w datach:
+dataWydania - dataWaznosci) dla jednego podmiotId.
+
+Tablice Multiplicity:
+wszystkie pola wymagane - jeśli w jsonie zabraknie którego kolwiek pola, rzucamy wyjątkiem.
+
+2. UdostepnijDecyzje wyszukajDecyzje(WyszukajDecyzeRequest dto);
+- metoda polegająca na udostępnieniu wszystkich danych z bazy, po podanych parametrach wyszukiwania
+
+WyszukajDecyzjeRequest:
+Long idDecyzji; String numerDecyzji; String numerOznaczenia; Long podmiotId;
+
+Tablice Multiplicity:
+Możemy podać tylko jeden z parametrów np.
+czyli nie możemy przekazać idDecyzji oraz numeruDecyzji
+
+UdostepnijDecyzje:
+DecyzjaEntity decyzja; UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tablice; DanePodmiotu danePodmiotu
+
+3. Long uchylDecyzje(UchylDecyzjeRequest dto);
+-metoda polegająca na uchyleniu decyzji - czyli wykonując tą czynność dataWaznosci będzie zastępowana przez datęUchylenia
+
+UchylDecyzjeRequest:
+Long decyzjaId; LocalDate dataUchylenia;
+
+4. Long modyfikujPodmiot(ModyfikujPodmiotRequest dto);
+-metoda zmieniająca dane podmiotu, każda zmiana zwiększa aktualny wariant podmiotu o +1.
+-przy udanej modyfikacji zwraca idDecyzji
+
+ModyfikujPodmiotRequest:
+Long podmiotId, String imie; String nazwisko; String pesel;
+String miasto; String nazwaUlicy; Integer nrDomu; Integer nrMieszkania;
+
+5. Long rozliczDecyzje(RozliczDecyzjeRequest dto);
+-metoda polegająca na rozliczaniu się z oznaczeń oraz blankietów.
+Przesyłamy w niej pewną ilość blankietów i/lub oznaczeń i zmieniamy ich stan, na ten któy został przesłany.
+
+RozliczDecyzjeRequest:
+List<DokumentOznaczenieDto> dokumentOznaczenie;
+
+DokumentOznaczenieDto:
+OznaczenieDto oznaczenie;
+DokumentDto dokument;
+
+OznaczenieDto:
+Long oznaczenieId;
+String stan;
+
+DokumentDto:
+Long dokumentId;
+String stan;
+
+Tablice Walidacyjne:
+TW02.01 - Przesłane ID musi istnieć w bazie danych.(czyli jak prześlemy dto z OznaczenieDto i w nim
+pole oznaczenieId = 5, to oznaczenie o id =5 musi istnieć. Możemy przesać zarówno oznaczenia jak i dokumenty.
+Tw02.02 - W bazie danych dla przesłanego id, dokumenty/oznaczenia musza być w stanie ODEBRANY.
+
+
+
+Dodatkowo:
+Wysyłać komunikat na konsole, o nierozliczonych decyzjach.
+Jeśli dataWaznosci - 30dni <= TERAZ oraz
+jej wszystkie dokumenty/oznaczenia nie zostały rozliczone (czyli przynajmniej jedno lub dokument ma stan ODEBRANY),
+to wysyłamy komunikat. Stworzyć mechanizm, który będzie automatycznie przeszukiwać nierozliczone decyzje.
+Możemy użyc do tego CRONa.
+Automat ma chodzić raz na 5minut.
+
+
+
+Do zamiany daty z JSONa na LocalDate możemy użyć biblioteki JACKSOna:
+<dependency>
+   <groupId>com.fasterxml.jackson.core</groupId>
+   <artifactId>jackson-databind</artifactId>
+   <version>2.9.7</version>
+</dependency>
+<dependency>
+   <groupId>com.fasterxml.jackson.datatype</groupId>
+   <artifactId>jackson-datatype-jsr310</artifactId>
+   <version>2.9.7</version>
+</dependency>
+
+oraz adnotacji nad polem naszej daty:
+
+@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+@JsonDeserialize(using = LocalDateDeserializer.class)
+LocalDate dataWydania;
+
+korzystamy wtedy z ObjectMappera do convertowania jsona do klasy.
+
+
+

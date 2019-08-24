@@ -7,7 +7,6 @@ import sda.pl.entity.DecyzjaEntity;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -16,8 +15,12 @@ public class Main {
 
         DecyzjaEntity decyzjaEntity = new DecyzjaEntity(jsontoWydajDec.getNumer(),jsontoWydajDec.getDataWaznosci(),
                 jsontoWydajDec.getDataWydania());
+
+
+
         LocalDate dataWaznosci = decyzjaEntity.getDataWaznosci();
         System.out.println(dataWaznosci);
+
 
 
     }

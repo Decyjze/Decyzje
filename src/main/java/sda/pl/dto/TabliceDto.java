@@ -10,7 +10,7 @@ import java.util.List;
 public class TabliceDto {
 
     private String numer;
-    private ZlDto zlDto;
-    private List<BlankietDto> blankietDto;
+    private ZlDto zl;
+    private List<BlankietDto> blankiety;
 
 }

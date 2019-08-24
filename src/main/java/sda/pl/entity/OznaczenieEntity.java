@@ -7,5 +7,5 @@ public class OznaczenieEntity {
     private RodzajOznaczenia rodzajOznaczenia;
     private Long zl2TpId;
     private Stan stan;
-    private Long zl2TpId ;
+
 }

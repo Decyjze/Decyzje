@@ -12,9 +12,8 @@ public class Main {
         JsonToObject jsonToObject = new JsonToObject();
         WydajDecDto jsontoWydajDec = jsonToObject.getJsontoWydajDec(new File("json/wydajDec.json"));
 
-
-        Long id;
-        DecyzjaEntity decyzjaEntity = new DecyzjaEntity()
+        DecyzjaEntity decyzjaEntity = new DecyzjaEntity(jsontoWydajDec.getNumer(),jsontoWydajDec.getDataWaznosci(),
+                jsontoWydajDec.getDataWydania());
 
 
 

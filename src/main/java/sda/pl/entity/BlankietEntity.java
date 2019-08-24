@@ -1,6 +1,10 @@
 package sda.pl.entity;
 
-//mateusz
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class BlankietEntity  {
     private static Long staticId = 1L;
     private Long id;

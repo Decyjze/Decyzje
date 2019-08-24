@@ -10,7 +10,7 @@ import java.util.List;
 public class TabliceDto {
 
     private String numer;
-    private ZlDto zl;
+    private ZnakLegalizacyjnyDto zl;
     private List<BlankietDto> blankiety;
 
 }

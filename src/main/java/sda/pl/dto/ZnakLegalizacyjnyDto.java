@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ZlDto {
+public class ZnakLegalizacyjnyDto {
 
     private String numer;
 

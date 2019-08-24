@@ -158,3 +158,6 @@ oraz adnotacji nad polem naszej daty:
 LocalDate dataWydania;
 
 korzystamy wtedy z ObjectMappera do convertowania jsona do klasy.
+
+
+

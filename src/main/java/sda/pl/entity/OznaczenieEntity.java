@@ -1,5 +1,10 @@
 package sda.pl.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OznaczenieEntity {
     private static Long staticId = 1L;
     private Long id;
@@ -9,7 +14,7 @@ public class OznaczenieEntity {
     private Long zl2TpId;
     private Stan stan;
 
-    public OznaczenieEntity(Long id, Long decyzjaId, String numer, RodzajOznaczenia rodzajOznaczenia,
+    public OznaczenieEntity(Long decyzjaId, String numer, RodzajOznaczenia rodzajOznaczenia,
                             Long zl2TpId, Stan stan) {
         this.id = staticId;
         staticId ++;

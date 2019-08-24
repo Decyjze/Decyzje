@@ -1,7 +1,7 @@
-sda.pl.entity.DecyzjaEntity:
+DecyzjaEntity:
 Long id; String numer; LocalDateTime dataWaznosci; LocalDateTime dataWydania;
 
-sda.pl.entity.UchylenieDecyzjiEntity:
+UchylenieDecyzjiEntity:
 Long id; Long decyzjaId; LocalDate dataUchylenia;
 
 BlankietEntity:
@@ -17,7 +17,7 @@ PodmiotEntity:
 Long id; Long decyzjaId; Long nrWariantu;
 
 DanePodmiotu:
-Long podmiotId; Long podmiotId, Long nrWariantu; String imie; String nazwisko; String pesel;
+Long id; Long podmiotId, Long nrWariantu; String imie; String nazwisko; String pesel;
 String miasto; String nazwaUlicy; Integer nrDomu; Integer nrMieszkania;
 
 StatusRekordu:
@@ -43,12 +43,12 @@ analogicznie inne metody będa mieć swoje jsony.
 W momencie zapisu Encji generowane sa automatycznie ich id. Zaczynamy od 1 i incrementujemy o +1
  kazdy następny zapis.
 1. Long wydajDecyzje(WydajDecyzjeRequest dto)
-zwracany id sda.pl.entity.DecyzjaEntity
+zwracany id DecyzjaEntity
 WydajDecyzjeRequest:
-String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tabliceDto; DanePodmiotuDto danePodmiotuDto;
+String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tablice; DanePodmiotuDto danePodmiotu;
 
 TablicaDto:
-String numer; ZnakLegalizacyjnyDto zlDto; List<BlankietDto> blankietDto;
+String numer; ZnakLegalizacyjnyDto zl; List<BlankietDto> blankiety;
 
 ZnakLegalizacyjnyDto:
 String numer;
@@ -87,7 +87,7 @@ Możemy podać tylko jeden z parametrów np.
 czyli nie możemy przekazać idDecyzji oraz numeruDecyzji
 
 UdostepnijDecyzje:
-sda.pl.entity.DecyzjaEntity decyzja; sda.pl.entity.UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tabliceDto; DanePodmiotu danePodmiotuDto
+DecyzjaEntity decyzja; UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tablice; DanePodmiotu danePodmiotu
 
 3. Long uchylDecyzje(UchylDecyzjeRequest dto);
 -metoda polegająca na uchyleniu decyzji - czyli wykonując tą czynność dataWaznosci będzie zastępowana przez datęUchylenia
@@ -158,6 +158,3 @@ oraz adnotacji nad polem naszej daty:
 LocalDate dataWydania;
 
 korzystamy wtedy z ObjectMappera do convertowania jsona do klasy.
-
-
-

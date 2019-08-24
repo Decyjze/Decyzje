@@ -8,8 +8,5 @@ public class DecyzjaEntity {
     private LocalDateTime dataWaznosci;
     private LocalDateTime dataWydania;
 
-
-
-
 }
 

@@ -1,0 +1,24 @@
+{
+"numer": "RTLS9221",
+"dataWydania": "2019-08-24",
+"dataWaznosci": "2020-08-24",
+"tablice": [
+	{
+	"numer" : "LU24512",
+	"zl" : {"numer": "XXSDF22"},
+	"blankiety" : [
+		{"numer" : "BL2244", "typ": "DR"},
+		{"numer" : "BLFF23", "typ": "DR"},
+		{"numer" : "BLFF23", "typ": "PC"}
+	]
+	}
+],
+"danePodmiotu" : {
+	"imie" : "Marian",
+	"nazwisko": "Kowalski",
+	"pesel": "91020472402",
+	"miasto" : "Lublin",
+	"nazwaUlicy" : "Biedronki",
+	"nrDomu" : 15
+}
+}

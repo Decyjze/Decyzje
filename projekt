@@ -1,7 +1,7 @@
-DecyzjaEntity:
+sda.pl.entity.DecyzjaEntity:
 Long id; String numer; LocalDateTime dataWaznosci; LocalDateTime dataWydania;
 
-UchylenieDecyzjiEntity:
+sda.pl.entity.UchylenieDecyzjiEntity:
 Long id; Long decyzjaId; LocalDate dataUchylenia;
 
 BlankietEntity:
@@ -43,7 +43,7 @@ analogicznie inne metody będa mieć swoje jsony.
 W momencie zapisu Encji generowane sa automatycznie ich id. Zaczynamy od 1 i incrementujemy o +1
  kazdy następny zapis.
 1. Long wydajDecyzje(WydajDecyzjeRequest dto)
-zwracany id DecyzjaEntity
+zwracany id sda.pl.entity.DecyzjaEntity
 WydajDecyzjeRequest:
 String numer; LocalDate dataWydania; LocalDate dataWaznosci; List<TablicaDto> tablice; DanePodmiotuDto danePodmiotu;
 
@@ -87,7 +87,7 @@ Możemy podać tylko jeden z parametrów np.
 czyli nie możemy przekazać idDecyzji oraz numeruDecyzji
 
 UdostepnijDecyzje:
-DecyzjaEntity decyzja; UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tablice; DanePodmiotu danePodmiotu
+sda.pl.entity.DecyzjaEntity decyzja; sda.pl.entity.UchylenieDecyzjiEntity uchylenieDecyzji; TablicaDto tablice; DanePodmiotu danePodmiotu
 
 3. Long uchylDecyzje(UchylDecyzjeRequest dto);
 -metoda polegająca na uchyleniu decyzji - czyli wykonując tą czynność dataWaznosci będzie zastępowana przez datęUchylenia

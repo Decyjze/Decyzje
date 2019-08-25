@@ -14,9 +14,10 @@ public class Main {
         JsonToObject jsonToObject = new JsonToObject();
 
         WydajDecyzjeRequest wydajDecyzjeRequest = jsonToObject.getJsontoWydajDecyzjeRequest(new File("json/wydajDec.json"));
+        System.out.println(wydajDecyzjeRequest);
         UchylDecyzje uchylDecyzje = jsonToObject.getJsonToUchylDecyzyjne(new File("json/UchylDecyzje.json"));
 
-        WydanieDecyzjiService wydanieDecyzjiService = new WydanieDecyzjiService(wydajDecyzjeRequest, uchylDecyzje, database);
+        //WydanieDecyzjiService wydanieDecyzjiService = new WydanieDecyzjiService(wydajDecyzjeRequest, uchylDecyzje, database);
 
 
     }

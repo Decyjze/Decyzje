@@ -3,16 +3,17 @@ package sda.pl.repository;
 import lombok.Getter;
 import sda.pl.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class Database {
-    private List<BlankietEntity> dataBaseBlankiet;
-    private List<DanePodmiotu> dataBaseDanePodmiotu;
-    private List<DecyzjaEntity> dataBaseDecyzjaEntity;
-    private List<OznaczenieEntity> dataBaseOznaczenieEntity;
-    private List<PodmiotEntity> dataBasePodmiotEntity;
-    private List<UchylenieDecyzjiEntity>dataBaseUchylenieDecyzjiEntity;
+    private List<BlankietEntity> dataBaseBlankiet = new ArrayList<>();
+    private List<DanePodmiotu> dataBaseDanePodmiotu = new ArrayList<>();
+    private List<DecyzjaEntity> dataBaseDecyzjaEntity = new ArrayList<>();
+    private List<OznaczenieEntity> dataBaseOznaczenieEntity = new ArrayList<>();
+    private List<PodmiotEntity> dataBasePodmiotEntity =new ArrayList<>();
+    private List<UchylenieDecyzjiEntity>dataBaseUchylenieDecyzjiEntity =new ArrayList<>();
 
 
     public boolean addDataBaseBlankiet(BlankietEntity blankietEntity) {

@@ -44,14 +44,20 @@ public class WydanieDecyzjiCreate {
             throw new IllegalArgumentException("Dane się powtarzają");
         }
         String numerDecyzji = dto.getNumer();
-        Database database= new Database();
-        List<BlankietEntity>
-
-        Set<String> numeryDecyzji = new HashSet<>(BlankietEntity);
-        if (numerDecyzji!=){
+        List<DecyzjaEntity> dataBaseDecyzjaEntity = database.getDataBaseDecyzjaEntity();
+        boolean numerDecyzjiIstniejeWBazie = dataBaseDecyzjaEntity.stream()
+                .map(DecyzjaEntity::getNumer)
+                .filter(numerDecyzjiEntity -> numerDecyzjiEntity.equals(numerDecyzji))
+                .findFirst()
+                .isPresent();
+        if (numerDecyzjiIstniejeWBazie){
             throw new IllegalArgumentException("Dane się powtarzają w bazie.");
         }
+        List<TabliceDto> tablice = dto.getTablice();
+        for (TabliceDto tabliceDto : tablice) {
+            String numerTablicy = tabliceDto.getNumer();
 
+        }
 
 
         DecyzjaEntity decyzjaEntity = new DecyzjaEntity(dto.getNumer(), dto.getDataWaznosci(),

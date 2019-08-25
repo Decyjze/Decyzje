@@ -64,8 +64,8 @@ wydajDecyzję polega na tym, aby zapisać do naszych encji odpowiednio wszystkie
 przed zapisem jednak należy wykonać kilka walidacji podanych danych:
 
 Tablice Walidacyjne:
-TW01.01: DTO_->dataWaznosci = Data wydania decyzji + 1 rok
-TW01.02: Numer decyzji nie może się powtarzać z Numerem decyzji w bazie
+//TW01.01: DTO_->dataWaznosci = Data wydania decyzji + 1 rok
+//TW01.02: Numer decyzji nie może się powtarzać z Numerem decyzji w bazie
 TW01.03: Numer oznaczeń nie  może się powtarzać z numerem tablicy lub znaku legalizacyjnego w bazie
 TW01.04: Numer blankietu nie może sie powtarzać z numerem blankietu w bazie
 Tw01.05: Numery oznaczeń oraz blankietów nie mogą się powtórzyć w ramach jednego komumikatu (nie możemy przesłać w pliku json np.

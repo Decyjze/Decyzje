@@ -20,6 +20,7 @@ public class Main {
         WydajDecyzjeRequest wydajDecyzjeRequest = jsonToObject.getJsontoWydajDecyzjeRequest(new File("json/wydajDec.json"));
         //System.out.println(wydajDecyzjeRequest);
         UchylDecyzje uchylDecyzje = jsonToObject.getJsonToUchylDecyzyjne(new File("json/UchylDecyzje.json"));
+        jsonToObject.g
         new WydanieDecyzjiCreate(wydajDecyzjeRequest, uchylDecyzje, database);
 
         database.getDataBaseDecyzjaEntity().stream().map(DecyzjaEntity::getDataWaznosci).forEach(System.out::println);

@@ -1,9 +1,6 @@
 package sda.pl.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -11,9 +8,11 @@ import java.util.List;
 @NoArgsConstructor
 @ToString
 public class TabliceDto {
-
+    @NonNull
     private String numer;
+    @NonNull
     private ZnakLegalizacyjnyDto zl;
+    @NonNull
     private List<BlankietDto> blankiety;
 
 }

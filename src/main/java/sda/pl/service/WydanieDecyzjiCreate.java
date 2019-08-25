@@ -56,8 +56,50 @@ public class WydanieDecyzjiCreate {
         List<TabliceDto> tablice = dto.getTablice();
         for (TabliceDto tabliceDto : tablice) {
             String numerTablicy = tabliceDto.getNumer();
+            String numeryZL = tabliceDto.getZl().getNumer();
+            List<OznaczenieEntity> dataBaseOznaczenieEntity = database.getDataBaseOznaczenieEntity();
+            boolean istniejeNumerTablicyWBazie = dataBaseOznaczenieEntity
+                    .stream()
+                    .map(OznaczenieEntity::getNumer)
+                    .filter(numerOznaczenia -> numerOznaczenia.equals(numerTablicy))
+                    .findFirst()
+                    .isPresent();
+            boolean istniejeNumerZLWBazie = dataBaseOznaczenieEntity
+                    .stream()
+                    .map(OznaczenieEntity::getNumer)
+                    .filter(numerOznaczenia -> numerOznaczenia.equals(numeryZL))
+                    .findFirst()
+                    .isPresent();
+            if (istniejeNumerTablicyWBazie||istniejeNumerZLWBazie){
+                throw new IllegalArgumentException("Dane w bazie się nie powtarzają ");
+            }
 
         }
+        List<TabliceDto> tabliceDtos = dto.getTablice();
+        for (TabliceDto tabliceDto : tabliceDtos) {
+            List<BlankietDto> blankiety = tabliceDto.getBlankiety();
+            for (BlankietDto blankietDto : blankiety) {
+                String numerBlankietu = blankietDto.getNumer();
+                List<BlankietEntity> blankietEntity = database.getDataBaseBlankiet();
+                boolean numerBlankietuIstniejeWBazie = blankietEntity.stream()
+                        .map(BlankietEntity::getNumer)
+                        .filter(numerBlankietuEntity -> numerBlankietuEntity.equals(numerBlankietu))
+                        .findFirst()
+                        .isPresent();
+                if (numerBlankietuIstniejeWBazie) {
+                    throw new IllegalArgumentException("Dane się powtarzają w bazie.");
+                }
+            }
+        }
+
+        //znalezc z bazy z DanePodmiotu podmiotId po PESEL z DTO
+        //nastepnie przeszukac baze z DecyzjaEntity i znalezc decyze po znalezionym podmiotId
+        //jesli nie znalalo to warunek OK, w przeciwnym wypadku musisz sprawdzic czy
+        //data terazniejsza jest pomiedzy data wydania a datta waznosci
+        //jesli jest, to warunek NOT OK, jesli nie jest warunek OK
+
+
+
 
 
         DecyzjaEntity decyzjaEntity = new DecyzjaEntity(dto.getNumer(), dto.getDataWaznosci(),

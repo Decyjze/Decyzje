@@ -27,6 +27,7 @@ public class WydanieDecyzjiCreate {
         uchylenieDecyzjiCreate(uchylDecyzje);
         blankietCreate(dto, decyzjaEntity);
         danePodmiotuCreate(dto, decyzjaEntity);
+        podmiotEnityCreate();
     }
 
     private Long wydajDecyzjeCreate(WydajDecyzjeRequest dto) {
@@ -36,11 +37,13 @@ public class WydanieDecyzjiCreate {
     }
 
     private void podmiotEnityCreate() {
-        Stream<DanePodmiotu> danePodmiotuStream = database.getDataBaseDanePodmiotu().stream()
-                .filter(s -> s.getPesel().equals(danePodmiotu.getPesel()));
-        danePodmiotuStream.forEach(new PodmiotEntity());
-
-
+        boolean equals = database.getDataBaseDanePodmiotu().stream().map(DanePodmiotu::getPesel).equals(danePodmiotu.getPesel());
+        if (equals){
+            Long nrWariantu = database.getDataBaseDanePodmiotu().get(0).getNrWariantu();
+            new PodmiotEntity(nrWariantu);
+        }else {
+           new PodmiotEntity(1L,uchylDecyzje.getDecyzjaId(),1L);
+        }
     }
 
     private Long danePodmiotuCreate(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {

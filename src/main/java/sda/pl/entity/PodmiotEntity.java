@@ -14,6 +14,7 @@ public class PodmiotEntity {
     public PodmiotEntity(Long decyzjaId) {
         //wariant=1
         //podmiotid auto
+        this.nrWariantu = staticWariantId;
         staticWariantId++;
         this.decyzjaId = decyzjaId;
     }

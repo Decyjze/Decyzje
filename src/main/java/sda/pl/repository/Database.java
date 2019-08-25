@@ -3,11 +3,12 @@ package sda.pl.repository;
 import lombok.Getter;
 import sda.pl.entity.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 public class Database {
-    private List<BlankietEntity> dataBaseBlankiet;
+    private List<BlankietEntity> dataBaseBlankiet = new ArrayList<>();
     private List<DanePodmiotu> dataBaseDanePodmiotu;
     private List<DecyzjaEntity> dataBaseDecyzjaEntity;
     private List<OznaczenieEntity> dataBaseOznaczenieEntity;

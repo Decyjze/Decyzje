@@ -9,26 +9,26 @@ import sda.pl.repository.Database;
 
 import java.util.Collection;
 
-public class WydanieDecyzjiService {
+public class WydanieDecyzjiCreate {
 
     private final WydajDecyzjeRequest dto;
-    private  final UchylDecyzje uchylDecyzje;
+    private final UchylDecyzje uchylDecyzje;
     private final Database database;
 
 
-    public WydanieDecyzjiService(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje, Database database) {
+    public WydanieDecyzjiCreate(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje, Database database) {
         this.dto = dto;
         this.uchylDecyzje = uchylDecyzje;
         this.database = database;
     }
 
 
-    public Long wydajDecyzje(WydajDecyzjeRequest dto) {
+    public Long wydajDecyzjeCreate(WydajDecyzjeRequest dto) {
         DecyzjaEntity decyzjaEntity = new DecyzjaEntity(dto.getNumer(), dto.getDataWaznosci(),
                 dto.getDataWydania());
 
-        blankietService(dto, decyzjaEntity);
-        danePodmiotuService(dto, decyzjaEntity);
+        blankietCreate(dto, decyzjaEntity);
+        danePodmiotuCreate(dto, decyzjaEntity);
 
 //        List<TabliceDto> tablice = dto.getTablice();
 //        for (TabliceDto tabliceDto : tablice) {
@@ -41,22 +41,21 @@ public class WydanieDecyzjiService {
         return decyzjaEntity.getId();
     }
 
-    public Long danePodmiotuService(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {
+    public Long danePodmiotuCreate(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {
         DanePodmiotuDto danePodmiotuDto = dto.getDanePodmiotu();//dane podmiatu
         DanePodmiotu danePodmiotu = new DanePodmiotu(decyzjaEntity.getId(), danePodmiotuDto.getImie()
                 , danePodmiotuDto.getNazwisko(), danePodmiotuDto.getPesel(), danePodmiotuDto.getMiasto(), danePodmiotuDto.getNazwaUlicy()
                 , danePodmiotuDto.getNrDomu(), danePodmiotuDto.getNrDomu());
 
         PodmiotEntity podmiotEntity = new PodmiotEntity(danePodmiotu.getPodmiotId(), uchylDecyzje.getDecyzjaId(), danePodmiotu.getNrWariantu());
-
         return danePodmiotu.getPodmiotId();
     }
 
-    public void blankietService(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {
+    public void blankietCreate(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {
         dto.getTablice().stream().map(TabliceDto::getBlankiety)
                 .flatMap(Collection::stream)
                 .forEach(blankietDto ->
-                       database.addDataBaseBlankiet(new BlankietEntity(decyzjaEntity.getId(), blankietDto.getNumer(), getTyp(blankietDto.getTyp()))));
+                        database.addDataBaseBlankiet(new BlankietEntity(decyzjaEntity.getId(), blankietDto.getNumer(), getTyp(blankietDto.getTyp()))));
     }
 
     private TypDokumentu getTyp(String typ) {
@@ -66,12 +65,11 @@ public class WydanieDecyzjiService {
         return TypDokumentu.PC;
     }
 
-    public Long uchylenieDecyzjiService(UchylDecyzje uchylDecyzje) {
+    public Long uchylenieDecyzjiCreate(UchylDecyzje uchylDecyzje) {
         UchylenieDecyzjiEntity uchylenieDecyzjiEntity = new UchylenieDecyzjiEntity(uchylDecyzje.getDecyzjaId(),
                 uchylDecyzje.getDataUchylenia());
         return uchylenieDecyzjiEntity.getId();
     }
-
 
 
 }

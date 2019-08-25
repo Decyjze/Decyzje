@@ -8,13 +8,16 @@ import sda.pl.entity.*;
 import sda.pl.repository.Database;
 
 import java.util.Collection;
+import java.util.stream.Stream;
 
 public class WydanieDecyzjiCreate {
 
     private final WydajDecyzjeRequest dto;
     private final UchylDecyzje uchylDecyzje;
     private final Database database;
-
+    private DecyzjaEntity decyzjaEntity;
+    private PodmiotEntity podmiotEntity;
+    private DanePodmiotu danePodmiotu;
 
     public WydanieDecyzjiCreate(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje, Database database) {
         this.dto = dto;
@@ -22,28 +25,35 @@ public class WydanieDecyzjiCreate {
         this.database = database;
         wydajDecyzjeCreate(dto);
         uchylenieDecyzjiCreate(uchylDecyzje);
-    }
-
-
-    private Long wydajDecyzjeCreate(WydajDecyzjeRequest dto) {
-        DecyzjaEntity decyzjaEntity = new DecyzjaEntity(dto.getNumer(), dto.getDataWaznosci(),
-                dto.getDataWydania());
-
-        database.adddataBaseDecyzjaEntity(decyzjaEntity);
-
         blankietCreate(dto, decyzjaEntity);
         danePodmiotuCreate(dto, decyzjaEntity);
+    }
+
+    private Long wydajDecyzjeCreate(WydajDecyzjeRequest dto) {
+        decyzjaEntity = new DecyzjaEntity(dto.getNumer(), dto.getDataWaznosci(), dto.getDataWydania());
+        database.adddataBaseDecyzjaEntity(decyzjaEntity);
         return decyzjaEntity.getId();
+    }
+
+    private void podmiotEnityCreate() {
+        Stream<DanePodmiotu> danePodmiotuStream = database.getDataBaseDanePodmiotu().stream()
+                .filter(s -> s.getPesel().equals(danePodmiotu.getPesel()));
+        danePodmiotuStream.forEach(new PodmiotEntity());
+
+
     }
 
     private Long danePodmiotuCreate(WydajDecyzjeRequest dto, DecyzjaEntity decyzjaEntity) {
         DanePodmiotuDto danePodmiotuDto = dto.getDanePodmiotu();
-        DanePodmiotu danePodmiotu = new DanePodmiotu(decyzjaEntity.getId(), danePodmiotuDto.getImie()
+
+        danePodmiotu = new DanePodmiotu(decyzjaEntity.getId(), podmiotEntity.getNrWariantu(), danePodmiotuDto.getImie()
                 , danePodmiotuDto.getNazwisko(), danePodmiotuDto.getPesel(), danePodmiotuDto.getMiasto(), danePodmiotuDto.getNazwaUlicy()
                 , danePodmiotuDto.getNrDomu(), danePodmiotuDto.getNrDomu());
+
         database.adddataBaseDanePodmiotu(danePodmiotu);
         database.addDataBasePodmiotEntity(new PodmiotEntity(danePodmiotu.getPodmiotId(), uchylDecyzje.getDecyzjaId(),
                 danePodmiotu.getNrWariantu()));
+
         return danePodmiotu.getPodmiotId();
     }
 

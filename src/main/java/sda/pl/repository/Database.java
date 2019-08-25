@@ -1,8 +1,7 @@
 package sda.pl.repository;
 
 import lombok.Getter;
-import sda.pl.entity.BlankietEntity;
-import sda.pl.entity.DanePodmiotu;
+import sda.pl.entity.*;
 
 import java.util.List;
 
@@ -10,12 +9,32 @@ import java.util.List;
 public class Database {
     private List<BlankietEntity> dataBaseBlankiet;
     private List<DanePodmiotu> dataBaseDanePodmiotu;
+    private List<DecyzjaEntity> dataBaseDecyzjaEntity;
+    private List<OznaczenieEntity> dataBaseOznaczenieEntity;
+    private List<PodmiotEntity> dataBasePodmiotEntity;
+    private List<UchylenieDecyzjiEntity>dataBaseUchylenieDecyzjiEntity;
+
+
     public boolean addDataBaseBlankiet(BlankietEntity blankietEntity) {
        return dataBaseBlankiet.add(blankietEntity);
     }
     public boolean adddataBaseDanePodmiotu(DanePodmiotu danePodmiotu) {
         return dataBaseDanePodmiotu.add(danePodmiotu);
     }
+    public boolean adddataBaseDecyzjaEntity(DecyzjaEntity decyzjaEntity){
+        return dataBaseDecyzjaEntity.add(decyzjaEntity);
+    }
+    public boolean addDataBaseOznaczenieEntity(OznaczenieEntity oznaczenieEntity){
+        return dataBaseOznaczenieEntity.add(oznaczenieEntity);
+    }
+    public boolean addDataBasePodmiotEntity(PodmiotEntity podmiotEntity){
+        return dataBasePodmiotEntity.add(podmiotEntity);
+    }
+    public boolean addDataBaseUchylenieDecyzjiEntity(UchylenieDecyzjiEntity uchylenieDecyzjiEntity){
+        return  dataBaseUchylenieDecyzjiEntity.add(uchylenieDecyzjiEntity);
+
+    }
+
 
 
 }

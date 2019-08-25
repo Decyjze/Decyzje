@@ -5,6 +5,7 @@ import sda.pl.dto.TabliceDto;
 import sda.pl.dto.UchylDecyzje;
 import sda.pl.dto.WydajDecyzjeRequest;
 import sda.pl.entity.*;
+import sda.pl.repository.Database;
 
 import java.util.Collection;
 
@@ -12,11 +13,13 @@ public class WydanieDecyzjiService {
 
     private final WydajDecyzjeRequest dto;
     private  final UchylDecyzje uchylDecyzje;
+    private final Database database;
 
 
-    public WydanieDecyzjiService(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje) {
+    public WydanieDecyzjiService(WydajDecyzjeRequest dto, UchylDecyzje uchylDecyzje, Database database) {
         this.dto = dto;
         this.uchylDecyzje = uchylDecyzje;
+        this.database = database;
     }
 
 
@@ -53,7 +56,7 @@ public class WydanieDecyzjiService {
         dto.getTablice().stream().map(TabliceDto::getBlankiety)
                 .flatMap(Collection::stream)
                 .forEach(blankietDto ->
-                        new BlankietEntity(decyzjaEntity.getId(), blankietDto.getNumer(), getTyp(blankietDto.getTyp())));
+                       database.addDataBaseBlankiet(new BlankietEntity(decyzjaEntity.getId(), blankietDto.getNumer(), getTyp(blankietDto.getTyp()))));
     }
 
     private TypDokumentu getTyp(String typ) {

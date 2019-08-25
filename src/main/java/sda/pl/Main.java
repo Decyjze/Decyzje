@@ -16,10 +16,7 @@ public class Main {
         WydajDecyzjeRequest wydajDecyzjeRequest = jsonToObject.getJsontoWydajDecyzjeRequest(new File("json/wydajDec.json"));
         UchylDecyzje uchylDecyzje = jsonToObject.getJsonToUchylDecyzyjne(new File("json/UchylDecyzje.json"));
 
-        WydanieDecyzjiService wydanieDecyzjiService = new WydanieDecyzjiService(wydajDecyzjeRequest,uchylDecyzje);
-
-
-
+        WydanieDecyzjiService wydanieDecyzjiService = new WydanieDecyzjiService(wydajDecyzjeRequest, uchylDecyzje, database);
 
 
     }

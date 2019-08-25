@@ -21,5 +21,7 @@ public class DecyzjaEntity {
         this.dataWaznosci = dataWaznosci;
         this.dataWydania = dataWydania;
     }
+
+
 }
 

@@ -37,8 +37,9 @@ public class WydanieDecyzjiCreate {
     }
 
     private void podmiotEnityCreate() {
-        boolean equals = database.getDataBaseDanePodmiotu().stream().map(DanePodmiotu::getPesel).equals(danePodmiotu.getPesel());
-        if (equals){
+       // boolean present = database.getDataBaseDanePodmiotu().stream().filter(s -> s.getPesel().equals(dto.getDanePodmiotu().getPesel())).findFirst().isPresent();
+        boolean present = database.getDataBaseDanePodmiotu().stream().anyMatch(s -> s.getPesel().equals(dto.getDanePodmiotu().getPesel()));
+        if (present){
             Long nrWariantu = database.getDataBaseDanePodmiotu().get(0).getNrWariantu();
             new PodmiotEntity(nrWariantu);
         }else {

@@ -1,8 +1,6 @@
 package sda.pl.connection;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import sda.pl.dto.BlankietDto;
-import sda.pl.dto.TabliceDto;
 import sda.pl.dto.UchylDecyzje;
 import sda.pl.dto.WydajDecyzjeRequest;
 

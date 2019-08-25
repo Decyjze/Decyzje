@@ -6,7 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DanePodmiotu {
-    private static Long staticWariantId;
+    private static Long staticWariantId = 1L;
     private Long podmiotId;
     private Long nrWariantu;
     private String imie;

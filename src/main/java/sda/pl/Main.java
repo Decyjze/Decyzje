@@ -3,6 +3,7 @@ package sda.pl;
 import sda.pl.connection.JsonToObject;
 import sda.pl.dto.UchylDecyzje;
 import sda.pl.dto.WydajDecyzjeRequest;
+import sda.pl.entity.BlankietEntity;
 import sda.pl.repository.Database;
 import sda.pl.service.WydanieDecyzjiCreate;
 
@@ -16,11 +17,11 @@ public class Main {
         Database database = new Database();
 
         WydajDecyzjeRequest wydajDecyzjeRequest = jsonToObject.getJsontoWydajDecyzjeRequest(new File("json/wydajDec.json"));
-        System.out.println(wydajDecyzjeRequest);
+        //System.out.println(wydajDecyzjeRequest);
         UchylDecyzje uchylDecyzje = jsonToObject.getJsonToUchylDecyzyjne(new File("json/UchylDecyzje.json"));
 
         new WydanieDecyzjiCreate(wydajDecyzjeRequest, uchylDecyzje, database);
-        database.getDataBaseBlankiet().forEach(System.out::println);
+        database.getDataBaseDecyzjaEntity().stream().map(s->s.getDataWydania()).forEach(System.out::println);
 
 
 

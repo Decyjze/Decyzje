@@ -21,6 +21,11 @@ public class JsonToObject {
         UchylDecyzje uchylDecyzje = objectMapper.readValue(json, UchylDecyzje.class);
         return uchylDecyzje;
     }
+    public UchylDecyzje getJsonToRozliczDecyzje(File json) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Roz uchylDecyzje = objectMapper.readValue(json, .class);
+        return uchylDecyzje;
+    }
 //    public BlankietDto getJsonToBlankietDto(File json) throws IOException {
 //        ObjectMapper objectMapper = new ObjectMapper();
 //        BlankietDto blankietDto = objectMapper.readValue(json, BlankietDto.class);

@@ -4,6 +4,7 @@ import sda.pl.connection.JsonToObject;
 import sda.pl.dto.UchylDecyzje;
 import sda.pl.dto.WydajDecyzjeRequest;
 import sda.pl.entity.BlankietEntity;
+import sda.pl.entity.DecyzjaEntity;
 import sda.pl.repository.Database;
 import sda.pl.service.WydanieDecyzjiCreate;
 
@@ -19,9 +20,10 @@ public class Main {
         WydajDecyzjeRequest wydajDecyzjeRequest = jsonToObject.getJsontoWydajDecyzjeRequest(new File("json/wydajDec.json"));
         //System.out.println(wydajDecyzjeRequest);
         UchylDecyzje uchylDecyzje = jsonToObject.getJsonToUchylDecyzyjne(new File("json/UchylDecyzje.json"));
-
+        jsonToObject.g
         new WydanieDecyzjiCreate(wydajDecyzjeRequest, uchylDecyzje, database);
-        database.getDataBaseDecyzjaEntity().stream().map(s->s.getDataWydania()).forEach(System.out::println);
+
+        database.getDataBaseDecyzjaEntity().stream().map(DecyzjaEntity::getDataWaznosci).forEach(System.out::println);
 
 
 
